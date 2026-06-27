@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamiadi - Portofolio Profesional</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background: #f8fafc; 
+            color: #334155;
+            opacity: 0;
+            animation: fadeInBody 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+
+        /* LANDING & LOGIN PAGE */
+        .hero-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .main-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            width: 100%;
+            max-width: 850px;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 35px;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out both;
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-card { grid-template-columns: 1fr; }
+        }
+        
+        /* About Me Section inside Card */
+        .about-section {
+            text-align: left;
+            border-right: 1px solid #e2e8f0;
+            padding-right: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        @media (max-width: 768px) {
+            .about-section { border-right: none; border-bottom: 1px solid #e2e8f0; padding-right: 0; padding-bottom: 25px; }
+        }
+
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3b82f6;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            animation: scaleIn 0.6s ease-out 0.5s both;
+        }
+
+        .about-section h2 { 
+            color: #1e40af; 
+            margin-bottom: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            letter-spacing: 1px;
+            animation: typingTitle 1.5s steps(20, end) both 1s, blinkCursor 0.75s step-end infinite;
+            border-right: 2px solid #1e40af;
+        }
+
+        @keyframes typingTitle {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blinkCursor {
+            from, to { border-color: transparent }
+            50% { border-color: #1e40af }
+        }
+
+        .about-section p { 
+            font-size: 14px; 
+            color: #64748b; 
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 2.2s both;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        /* Login Section inside Card */
+        .login-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 2.5s both;
+        }
+        .login-section h2 { color: #1e40af; margin-bottom: 10px; text-align: center; }
+        .login-section p.subtitle { color: #64748b; margin-bottom: 25px; text-align: center; font-size: 14px; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.1s;
+        }
+        button:hover { background: #1d4ed8; }
+        button:active { transform: scale(0.98); }
+        
+        .demo-box {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .hidden { display: none !important; }
+
+        /* PORTFOLIO PAGE */
+        .header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6); 
+            color: white; 
+            text-align: center; 
+            padding: 80px 20px;
+            position: relative;
+        }
+        .header h1 { font-size: 48px; margin: 0; letter-spacing: 2px; animation: scaleIn 0.5s ease-out both; }
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .header p { font-size: 22px; margin-top: 10px; opacity: 0.9; animation: fadeInText 0.5s ease-out 0.3s both; }
+        
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: normal;
+            width: auto;
+            margin: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .logout-btn:hover { background: white; color: #1e40af; }
+
+        .content-container {
+            padding: 40px 20px; 
+            max-width: 900px; 
+            margin: 0 auto;
+        }
+        .section-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        .section-box.visible { opacity: 1; transform: translateY(0); }
+        
+        .section-box h2 {
+            color: #1e40af;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* TAMPILAN TABEL DATA DIRI */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .info-table td {
+            padding: 8px 4px;
+            vertical-align: top;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .info-table td.label {
+            font-weight: bold;
+            color: #475569;
+            width: 180px;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 4px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .skill-badge:hover { transform: translateY(-3px) scale(1.05); background: #bae6fd; }
+
+        .job { margin-bottom: 15px; transition: transform 0.2s; }
+        .job:hover { transform: translateX(5px); }
+        .job-title { font-weight: bold; color: #1e293b; }
+        .job-date { font-size: 13px; color: #64748b; margin-bottom: 5px; }
+        
+        footer {
+            text-align: center; 
+            padding: 20px; 
+            background: #1e2937; 
+            color: #9ca3af; 
+            border-radius: 12px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HALAMAN UTAMA: TENTANG SAYA & LOGIN -->
+    <div id="loginPage" class="hero-container">
+        <div class="main-card">
+            
+            <!-- Sisi Kiri: Latar Belakang / Tentang Saya -->
+            <div class="about-section">
+                <!-- Tambahkan file foto Anda di folder yang sama dengan nama: foto-jamiadi.jpg -->
+                <img src="jamiadi.jpeg" alt="Foto Jamiadi" class="profile-img">
+                
+                <h2>Tentang Saya</h2>
+                <p>Halo! Saya <strong>Jamiadi</strong>, seorang Software Engineer yang berdedikasi tinggi dengan ketertarikan kuat dalam pengembangan sistem informasi, arsitektur aplikasi, dan solusi teknologi modern.</p>
+                <br>
+                <p>Melalui portofolio digital ini, saya merangkum perjalanan profesional, keahlian teknis, serta latar belakang pendidikan saya di bidang IT secara komprehensif. Silakan login menggunakan akun demo untuk melanjutkan.</p>
+            </div>
+            
+            <!-- Sisi Kanan: Form Login -->
+            <div class="login-section">
+                <h2>JAMIADI</h2>
+                <p class="subtitle">Portofolio Login</p>
+                
+                <input type="email" id="email" placeholder="Email (contoh: jamiadi068@gmail.com)">
+                <input type="password" id="password" placeholder="Password">
+                
+                <button onclick="login()">LOGIN</button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HALAMAN PORTOFOLIO: DATA DIRI & PENGALAMAN -->
+    <div id="portfolioPage" class="hidden">
+        
+        <div class="header">
+            <button class="logout-btn" onclick="logout()">Keluar</button>
+            <h1>JAMIADI</h1>
+            <p>Software Engineer / Developer</p>
+        </div>
+
+        <div class="content-container">
+            
+            <!-- Data Diri (Sudah Diisi Lengkap) -->
+            <div class="section-box visible">
+                <h2>Data Diri</h2>
+                <table class="info-table">
+                    <tr>
+                        <td class="label">Nama Lengkap</td>
+                        <td>:</td>
+                        <td><strong>Jamiadi</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Tempat, Tgl Lahir</td>
+                        <td>:</td>
+                        <td>Nganjuk, 25 Mei 1990</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Alamat</td>
+                        <td>:</td>
+                        <td>Jl. Manunggal No. 2B, Kel. Petukangan Selatan, Kec. Pesanggrahan, Jakarta Selatan</td>
+                    </tr>
+                    <tr>
+                        <td class="label">No. Handphone / WA</td>
+                        <td>:</td>
+                        <td>083871174090</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Email</td>
+                        <td>:</td>
+                        <td>jamiadi068@gmail.com</td>
+                    </tr>
+                </table>
+                <br>
+                <p style="line-height: 1.7; font-size: 14.5px; color: #475569; border-top: 1px dashed #e2e8f0; padding-top: 12px; margin-top: 5px;">
+                    Seorang talenta IT yang sedang menempuh pendidikan di Universitas Pamulang dengan fokus pada implementasi pemrograman dan pemecahan masalah (problem solving). Memiliki latar belakang kerja yang kuat dalam kedisiplinan dan pencapaian target, serta bersemangat penuh untuk mengaplikasikan ilmu perkuliahan ke dalam proyek pengembangan perangkat lunak riil.
+                </p>
+            </div>
+
+            <!-- Kemampuan -->
+            <div class="section-box">
+                <h2>Kemampuan Utama</h2>
+                <div style="margin-top: 10px;">
+                    <span class="skill-badge">HTML5 & CSS3</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">Analisis Sistem Finansial</span>
+                    <span class="skill-badge">Technical Leadership</span>
+                    <span class="skill-badge">Problem Solving</span>
+                    <span class="skill-badge">Database & Query SQL</span>
+                </div>
+            </div>
+
+            <!-- Pengalaman Kerja -->
+            <div class="section-box">
+                <h2>Pengalaman Kerja</h2>
+                
+                <div class="job">
+                    <div class="job-title">Pt. Bank Jakarta Syariah & Pt. Finmas (Tech & Operations)</div>
+                    <div class="job-date">2024 - 2025</div>
+                    <p>Bertanggung jawab dalam analisis alur produk finansial digital, menjembatani kebutuhan sistem aplikasi pengguna baru (user acquisition system), serta memelihara kelancaran operasional platform.</p>
+                </div>
+                
+                <div class="job" style="margin-top: 20px;">
+                    <div class="job-title">Pt. CS Finance (BCA Group) (Credit Analyst & Risk Assessment)</div>
+                    <div class="job-date">2019 - 2023</div>
+                    <p>Melakukan evaluasi logika kelayakan kredit, merancang validasi data risiko, serta berkolaborasi dengan pihak mitra teknis (dealer) untuk optimalisasi target pemrosesan data perusahaan.</p>
+                </div>
+            </div>
+
+            <!-- Pendidikan -->
+            <div class="section-box">
+                <h2>Pendidikan</h2>
+                <div class="job">
+                    <div class="job-title">Universitas Pamulang</div>
+                    <div class="job-date">2023 - 2026</div>
+                    <p>Menempuh pendidikan tinggi Sistem Informasi & mengimplementasikan kompetensi arsitektur sistem di dunia industri kerja nyata.</p>
+                </div>
+            </div>
+
+            <footer>
+                © 2026 Jamiadi | Portofolio Profesional
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (email === "jamiadi068@gmail.com" && password === "123456") {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('portfolioPage').classList.remove('hidden');
+                window.scrollTo(0, 0);
+            } else {
+                alert("Email atau password salah! Gunakan akun demo yang tertera.");
+            }
+        }
+
+        function logout() {
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('portfolioPage').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
+
+        // Animasi muncul saat di-scroll
+        const sectionBoxes = document.querySelectorAll('.section-box');
+        const observerOptions = { root: null, threshold: 0.1 };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sectionBoxes.forEach(box => { observer.observe(box); });
+    </script>
+</body>
+</html>
