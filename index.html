@@ -11,7 +11,7 @@
             padding: 0;
         }
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             margin: 0; 
             background: #f8fafc; 
             color: #334155;
@@ -149,15 +149,6 @@
         button:hover { background: #1d4ed8; }
         button:active { transform: scale(0.98); }
         
-        .demo-box {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #64748b;
-            background: #f1f5f9;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-        }
         .hidden { display: none !important; }
 
         /* PORTFOLIO PAGE */
@@ -191,6 +182,79 @@
             transition: background 0.3s, color 0.3s;
         }
         .logout-btn:hover { background: white; color: #1e40af; }
+
+        /* MENU TITIK TIGA IPHONE STYLE */
+        .menu-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .ellipsis-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            margin: 0;
+        }
+        .ellipsis-btn:hover { background: white; color: #1e40af; }
+
+        /* Dropdown bergaya menu iOS Context Menu */
+        .ios-dropdown {
+            position: absolute;
+            top: 45px;
+            left: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 13px;
+            width: 190px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.4);
+            transform: scale(0.9) translateY(-10px);
+            opacity: 0;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+        }
+        .ios-dropdown.show {
+            display: flex;
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .ios-dropdown-item {
+            padding: 12px 16px;
+            font-size: 15px;
+            color: #000;
+            text-align: left;
+            background: transparent;
+            border: none;
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            font-weight: normal;
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+            transition: background 0.15s;
+        }
+        .ios-dropdown-item:last-child {
+            border-bottom: none;
+        }
+        .ios-dropdown-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .ios-dropdown-item:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
 
         .content-container {
             padding: 40px 20px; 
@@ -251,6 +315,98 @@
         .job:hover { transform: translateX(5px); }
         .job-title { font-weight: bold; color: #1e293b; }
         .job-date { font-size: 13px; color: #64748b; margin-bottom: 5px; }
+
+        /* GALERI MEDIA (UNTUK SERTIFIKASI & PROJECT) */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .media-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8fafc;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer; /* Menandakan foto bisa diklik */
+        }
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .media-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+        .media-caption {
+            padding: 8px 12px;
+            font-size: 13px;
+            color: #475569;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        /* MODAL POP-UP GAMBAR (LIGHTBOX) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .image-modal.show .modal-content {
+            transform: scale(1);
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            user-select: none;
+        }
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        @media (max-width: 700px) {
+            .modal-content { max-width: 95%; }
+            .close-modal { top: 15px; right: 20px; font-size: 35px; }
+        }
         
         footer {
             text-align: center; 
@@ -265,22 +421,18 @@
 </head>
 <body>
 
-    <!-- HALAMAN UTAMA: TENTANG SAYA & LOGIN -->
     <div id="loginPage" class="hero-container">
         <div class="main-card">
             
-            <!-- Sisi Kiri: Latar Belakang / Tentang Saya -->
             <div class="about-section">
-                <!-- Tambahkan file foto Anda di folder yang sama dengan nama: foto-jamiadi.jpg -->
                 <img src="jamiadi.jpeg" alt="Foto Jamiadi" class="profile-img">
                 
                 <h2>Tentang Saya</h2>
                 <p>Halo! Saya <strong>Jamiadi</strong>, seorang Software Engineer yang berdedikasi tinggi dengan ketertarikan kuat dalam pengembangan sistem informasi, arsitektur aplikasi, dan solusi teknologi modern.</p>
                 <br>
-                <p>Melalui portofolio digital ini, saya merangkum perjalanan profesional, keahlian teknis, serta latar belakang pendidikan saya di bidang IT secara komprehensif. Silakan login menggunakan username dan password di profil whatsapp untuk melihat curiculum vite.</p>
+                <p>Melalui portofolio digital ini, saya merangkum perjalanan profesional, keahlian teknis, serta latar belakang pendidikan saya di bidang IT secara komprehensif. Silakan login menggunakan akun demo jika diperlukan (Email: jamiadi068@gmail.com | Pass: 123456).</p>
             </div>
             
-            <!-- Sisi Kanan: Form Login -->
             <div class="login-section">
                 <h2>JAMIADI</h2>
                 <p class="subtitle">Portofolio Login</p>
@@ -289,16 +441,26 @@
                 <input type="password" id="password" placeholder="Password">
                 
                 <button onclick="login()">LOGIN</button>
-
             </div>
 
         </div>
     </div>
 
-    <!-- HALAMAN PORTOFOLIO: DATA DIRI & PENGALAMAN -->
     <div id="portfolioPage" class="hidden">
         
         <div class="header">
+            <div class="menu-container">
+                <button class="ellipsis-btn" id="menuBtn" onclick="toggleMenu(event)">•••</button>
+                <div class="ios-dropdown" id="iosDropdown">
+                    <button class="ios-dropdown-item" onclick="scrollToSection('dataDiriSection')">Data Diri</button>
+                    <button class="ios-dropdown-item" onclick="scrollToSection('kemampuanSection')">Kemampuan Utama</button>
+                    <button class="ios-dropdown-item" onclick="scrollToSection('pengalamanSection')">Pengalaman Kerja</button>
+                    <button class="ios-dropdown-item" onclick="scrollToSection('pendidikanSection')">Pendidikan</button>
+                    <button class="ios-dropdown-item" onclick="scrollToSection('sertifikasiSection')">Sertifikasi</button>
+                    <button class="ios-dropdown-item" onclick="scrollToSection('projectSection')">Project</button>
+                </div>
+            </div>
+
             <button class="logout-btn" onclick="logout()">Keluar</button>
             <h1>JAMIADI</h1>
             <p>Software Engineer / Developer</p>
@@ -306,8 +468,7 @@
 
         <div class="content-container">
             
-            <!-- Data Diri (Sudah Diisi Lengkap) -->
-            <div class="section-box visible">
+            <div class="section-box visible" id="dataDiriSection">
                 <h2>Data Diri</h2>
                 <table class="info-table">
                     <tr>
@@ -342,8 +503,7 @@
                 </p>
             </div>
 
-            <!-- Kemampuan -->
-            <div class="section-box">
+            <div class="section-box" id="kemampuanSection">
                 <h2>Kemampuan Utama</h2>
                 <div style="margin-top: 10px;">
                     <span class="skill-badge">HTML5 & CSS3</span>
@@ -355,25 +515,26 @@
                 </div>
             </div>
 
-            <!-- Pengalaman Kerja -->
-            <div class="section-box">
+            <div class="section-box" id="pengalamanSection">
                 <h2>Pengalaman Kerja</h2>
-                
                 <div class="job">
-                    <div class="job-title">Pt. Bank Jakarta Syariah & Pt. Finmas (Tech & Operations)</div>
-                    <div class="job-date">2024 - 2025</div>
-                    <p>Bertanggung jawab dalam analisis alur produk finansial digital, menjembatani kebutuhan sistem aplikasi pengguna baru (user acquisition system), serta memelihara kelancaran operasional platform.</p>
+                    <div class="job-title">PT Bank Danamon Indonesia Tbk - Administration Segment Support</div>
+                    <div class="job-date">2026 - Sekarang</div>
+                    <p>Bertanggung jawab dalam mendukung proses administrasi operasional bisnis, melakukan pengelolaan dan verifikasi dokumen nasabah, memastikan kelengkapan administrasi sesuai dengan kebijakan perusahaan, menyusun laporan operasional, mengelola data pada sistem perbankan, serta berkoordinasi dengan berbagai unit kerja untuk mendukung kelancaran proses bisnis dan pelayanan kepada nasabah.</p>
                 </div>
-                
+                <div class="job" style="margin-top: 20px;">
+                    <div class="job-title">PT Bank Mandiri (Persero) Tbk - Account Officer</div>
+                    <div class="job-date">2024 - 2025</div>
+                    <p>Mengelola hubungan dengan nasabah, melakukan analisis kelayakan dan kebutuhan pembiayaan, menawarkan produk dan layanan perbankan, melakukan monitoring portofolio kredit, serta memastikan tercapainya target bisnis melalui pelayanan yang profesional dan berorientasi pada kepuasan nasabah.</p>
+                </div>
                 <div class="job" style="margin-top: 20px;">
                     <div class="job-title">Pt. CS Finance (BCA Group) (Credit Analyst & Risk Assessment)</div>
-                    <div class="job-date">2019 - 2023</div>
+                    <div class="job-date">2015 - 2018</div>
                     <p>Melakukan evaluasi logika kelayakan kredit, merancang validasi data risiko, serta berkolaborasi dengan pihak mitra teknis (dealer) untuk optimalisasi target pemrosesan data perusahaan.</p>
                 </div>
             </div>
 
-            <!-- Pendidikan -->
-            <div class="section-box">
+            <div class="section-box" id="pendidikanSection">
                 <h2>Pendidikan</h2>
                 <div class="job">
                     <div class="job-title">Universitas Pamulang</div>
@@ -382,10 +543,64 @@
                 </div>
             </div>
 
+            <div class="section-box" id="sertifikasiSection">
+                <h2>Sertifikasi</h2>
+                <div class="job">
+                    <div class="job-title">Sertifikasi Kompetensi IT - Analisis Sistem</div>
+                    <div class="job-date">2025</div>
+                    <p>Sertifikasi dalam merancang arsitektur perangkat lunak dan manajemen alur kerja database relasional.</p>
+                </div>
+                <div class="media-grid">
+                    <div class="media-item" onclick="openImageModal('sertifikasi5.png')">
+                        <img src="sertifikasi5.png" alt="Sertifikasi 1">
+                        <div class="media-caption">Sertifikasi 1</div>
+                    </div>
+                    <div class="media-item" onclick="openImageModal('sertifikasi6.png')">
+                        <img src="sertifikasi6.png" alt="Sertifikasi 2">
+                        <div class="media-caption">Sertifikasi 2</div>
+                    </div>
+                    <div class="media-item" onclick="openImageModal('sertifikasi3.png')">
+                        <img src="sertifikasi3.png" alt="Sertifikasi 3">
+                        <div class="media-caption">Sertifikasi 3</div>
+                    </div>
+                    <div class="media-item" onclick="openImageModal('sertifikasi4.jpg')">
+                        <img src="sertifikasi4.jpg" alt="Sertifikasi 4">
+                        <div class="media-caption">Sertifikasi 4</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box" id="projectSection">
+                <h2>Project (Sedang Berjalan)</h2>
+                <div class="job">
+                    <div class="job-title">Project SSB Gagakmuda</div>
+                    <p>Mengembangkan platform atau sistem informasi internal berbasis web untuk mendukung operasional, manajemen data, maupun pengembangan program di Sekolah Sepak Bola (SSB) Gagakmuda.</p>
+                </div>
+                <div class="media-grid">
+                    <div class="media-item" onclick="openImageModal('landingpagessb.png')">
+                        <img src="landingpagessb.png" alt="Landing Page SSB">
+                        <div class="media-caption">Landing Page SSB</div>
+                    </div>
+                    <div class="media-item" onclick="openImageModal('loginssb.png')">
+                        <img src="loginssb.png" alt="Login Page SSB">
+                        <div class="media-caption">Login Page SSB</div>
+                    </div>
+                    <div class="media-item" onclick="openImageModal('dashboardadmin.png')">
+                        <img src="dashboardadmin.png" alt="Dashboard Admin SSB">
+                        <div class="media-caption">Dashboard Admin</div>
+                    </div>
+                </div>
+            </div>
+
             <footer>
                 © 2026 Jamiadi | Portofolio Profesional
             </footer>
         </div>
+    </div>
+
+    <div id="myImageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="imgModalTarget" onclick="event.stopPropagation()">
     </div>
 
     <script>
@@ -407,9 +622,61 @@
             document.getElementById('password').value = '';
             document.getElementById('portfolioPage').classList.add('hidden');
             document.getElementById('loginPage').classList.remove('hidden');
+            hideMenu();
         }
 
-        // Animasi muncul saat di-scroll
+        /* FUNGSI DROPDOWN MENU IPHONE */
+        function toggleMenu(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('iosDropdown');
+            if(dropdown.classList.contains('show')) {
+                hideMenu();
+            } else {
+                dropdown.style.display = 'flex';
+                setTimeout(() => {
+                    dropdown.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function hideMenu() {
+            const dropdown = document.getElementById('iosDropdown');
+            dropdown.classList.remove('show');
+            setTimeout(() => {
+                if(!dropdown.classList.contains('show')) {
+                    dropdown.style.display = 'none';
+                }
+            }, 200);
+        }
+
+        function scrollToSection(sectionId) {
+            hideMenu();
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.add('visible');
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        /* FUNGSI MODAL GAMBAR (POP-UP) */
+        function openImageModal(imgSrc) {
+            const modal = document.getElementById('myImageModal');
+            const modalImg = document.getElementById('imgModalTarget');
+            modalImg.src = imgSrc;
+            modal.classList.add('show');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('myImageModal');
+            modal.classList.remove('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('#menuBtn')) {
+                hideMenu();
+            }
+        }
+
         const sectionBoxes = document.querySelectorAll('.section-box');
         const observerOptions = { root: null, threshold: 0.1 };
 
